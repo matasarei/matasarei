@@ -6,5 +6,5 @@ I'm a web developer based in Varna, Bulgaria, focusing on building solid solutio
 
 ### 📊 GitHub Stats & Metrics
 <p align="center">
-  <img src="https://metrics.lecoq.io/matasarei" alt="matasarei metrics" width="100%" />
+  <img src="https://metrics.lecoq.io/matasarei?base.activity=false&base.community=false&base.metadata=false" alt="matasarei metrics" width="100%" />
 </p>
