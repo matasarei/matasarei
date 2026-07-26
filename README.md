@@ -2,9 +2,6 @@ I'm a web developer based in Varna, Bulgaria, focusing on building solid solutio
 
 [More about me...](https://hcnotes.cc/about/)
 
----
-
-### 📊 GitHub Stats
 <p align="center">
   <img src="https://img.shields.io/badge/Stargazers-89-181717?style=for-the-badge&logo=github" alt="Stargazers" />
   <img src="https://img.shields.io/badge/Forks-34-181717?style=for-the-badge&logo=github" alt="Forks" />
