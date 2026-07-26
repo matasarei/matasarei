@@ -24,17 +24,8 @@ I'm a passionate web developer based in Varna, Bulgaria, focusing on building so
 
 ---
 
-### 📊 GitHub Stats
+### 📊 GitHub Stats & Metrics
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=matasarei&show_icons=true&theme=radical" alt="matasarei's GitHub stats" width="48%" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=matasarei&layout=compact&theme=radical" alt="Top Languages" width="48%" />
-</p>
-
----
-
-### 🏆 GitHub Trophies
-<p align="center">
-  <a href="https://github.com/ryo-ma/github-profile-trophy">
-    <img src="https://github-profile-trophy.vercel.app/?username=matasarei&theme=radical&margin-w=15&margin-h=15" alt="matasarei trophies" />
-  </a>
+  <img src="https://metrics.lecoq.io/matasarei" alt="matasarei metrics" width="48%" />
+  <img src="https://streak-stats.demolab.com?user=matasarei&theme=radical" alt="matasarei streak stats" width="48%" />
 </p>
