@@ -4,7 +4,12 @@ I'm a web developer based in Varna, Bulgaria, focusing on building solid solutio
 
 ---
 
-### 📊 GitHub Stats & Metrics
+### 📊 GitHub Stats
 <p align="center">
-  <img src="https://metrics.lecoq.io/matasarei?base=0&base.header=1&base.repositories=1" alt="matasarei metrics" width="100%" />
+  <img src="https://img.shields.io/badge/Stargazers-89-181717?style=for-the-badge&logo=github" alt="Stargazers" />
+  <img src="https://img.shields.io/badge/Forks-34-181717?style=for-the-badge&logo=github" alt="Forks" />
+  <img src="https://img.shields.io/badge/Watchers-19-181717?style=for-the-badge&logo=github" alt="Watchers" />
+  <img src="https://img.shields.io/badge/Followers-12-181717?style=for-the-badge&logo=github" alt="Followers" />
+  <img src="https://img.shields.io/badge/Contributed_to-14_Repos-181717?style=for-the-badge&logo=github" alt="Contributed To" />
+  <img src="https://img.shields.io/badge/Joined-2014-181717?style=for-the-badge&logo=github" alt="Joined" />
 </p>
