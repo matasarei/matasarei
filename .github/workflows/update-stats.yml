@@ -24,11 +24,11 @@ jobs:
           # include private repositories; GITHUB_TOKEN only sees public ones.
           GH_TOKEN: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
           LOGIN: ${{ github.repository_owner }}
-        run: .github/scripts/update-stats.sh "$LOGIN" README.md
+        run: .github/scripts/update-stats.sh "$LOGIN" assets/stats.svg.in
 
       - name: Commit if changed
         run: |
-          if git diff --quiet README.md; then
+          if git diff --quiet assets/stats.svg; then
             echo "Stats unchanged"
             exit 0
           fi

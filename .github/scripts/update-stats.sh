@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Recomputes profile stats via the GitHub GraphQL API and rewrites the
-# static shields.io badge URLs in README.md. Requires `gh` and `jq`.
+# Recomputes profile stats via the GitHub GraphQL API and renders
+# assets/stats.svg from assets/stats.svg.in. Requires `gh` and `jq`.
 #
 # Stars, forks and watchers are summed over every public repository the
 # user owns, collaborates on, or belongs to through an organisation,
@@ -10,13 +10,13 @@
 set -euo pipefail
 
 LOGIN="${1:-${GITHUB_REPOSITORY_OWNER:-matasarei}}"
-README="${2:-README.md}"
+TEMPLATE="${2:-assets/stats.svg.in}"
+OUT="${TEMPLATE%.in}"
 ORGS="${STATS_ORGS:-grinchenkoedu profirealt}"
 
-badges=(Stargazers Forks Watchers Followers Contributed_to)
-for badge in "${badges[@]}"; do
-  if ! grep -q "badge/${badge}-" "$README"; then
-    echo "::error::badge '${badge}' not found in ${README}; refusing to continue" >&2
+for key in STARS FORKS WATCHERS FOLLOWERS CONTRIBUTED; do
+  if ! grep -q "__${key}__" "$TEMPLATE"; then
+    echo "::error::placeholder __${key}__ not found in ${TEMPLATE}; refusing to continue" >&2
     exit 1
   fi
 done
@@ -73,11 +73,10 @@ IFS=$'\t' read -r stars forks watchers followers contributed <<<"$stats"
 
 echo "stars=$stars forks=$forks watchers=$watchers followers=$followers contributed=$contributed"
 
-sed -i.bak -E \
-  -e "s#(badge/Stargazers-)[0-9]+(-)#\1${stars}\2#" \
-  -e "s#(badge/Forks-)[0-9]+(-)#\1${forks}\2#" \
-  -e "s#(badge/Watchers-)[0-9]+(-)#\1${watchers}\2#" \
-  -e "s#(badge/Followers-)[0-9]+(-)#\1${followers}\2#" \
-  -e "s#(badge/Contributed_to-)[0-9]+(_Repos-)#\1${contributed}\2#" \
-  "$README"
-rm -f "$README.bak"
+sed \
+  -e "s/__STARS__/${stars}/g" \
+  -e "s/__FORKS__/${forks}/g" \
+  -e "s/__WATCHERS__/${watchers}/g" \
+  -e "s/__FOLLOWERS__/${followers}/g" \
+  -e "s/__CONTRIBUTED__/${contributed}/g" \
+  "$TEMPLATE" > "$OUT"
