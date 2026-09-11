@@ -19,7 +19,8 @@ jobs:
           # Optional STATS_TOKEN (PAT with repo read access) lets "Contributed to"
           # include private repositories; GITHUB_TOKEN only sees public ones.
           GH_TOKEN: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
-        run: .github/scripts/update-stats.sh "${{ github.repository_owner }}" README.md
+          LOGIN: ${{ github.repository_owner }}
+        run: .github/scripts/update-stats.sh "$LOGIN" README.md
 
       - name: Commit if changed
         run: |
