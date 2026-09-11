@@ -5,10 +5,13 @@
 # Stars, forks and watchers are summed over every public repository the
 # user owns, collaborates on, or belongs to through an organisation,
 # forks included — the same set the profile's repository list shows.
+# Organisations are also queried by name (STATS_ORGS) because a private
+# org membership is invisible to the default Actions token.
 set -euo pipefail
 
 LOGIN="${1:-${GITHUB_REPOSITORY_OWNER:-matasarei}}"
 README="${2:-README.md}"
+ORGS="${STATS_ORGS:-grinchenkoedu profirealt}"
 
 badges=(Stargazers Forks Watchers Followers Contributed_to)
 for badge in "${badges[@]}"; do
@@ -18,7 +21,10 @@ for badge in "${badges[@]}"; do
   fi
 done
 
-stats=$(gh api graphql --paginate --slurp -f login="$LOGIN" -f query='
+tmp=$(mktemp -d)
+trap 'rm -rf "$tmp"' EXIT
+
+gh api graphql --paginate --slurp -f login="$LOGIN" -f query='
 query($login: String!, $cursor: String) {
   user(login: $login) {
     followers { totalCount }
@@ -33,19 +39,35 @@ query($login: String!, $cursor: String) {
       privacy: PUBLIC
     ) {
       pageInfo { hasNextPage endCursor }
-      nodes { stargazerCount forkCount watchers { totalCount } }
+      nodes { nameWithOwner stargazerCount forkCount watchers { totalCount } }
     }
   }
-}' | jq -r '
-  [.[] | .data.user] as $pages
-  | ($pages | map(.repositories.nodes[])) as $repos
+}' > "$tmp/user.json"
+
+for org in $ORGS; do
+  gh api graphql --paginate --slurp -f org="$org" -f query='
+query($org: String!, $cursor: String) {
+  organization(login: $org) {
+    repositories(first: 100, after: $cursor, privacy: PUBLIC) {
+      pageInfo { hasNextPage endCursor }
+      nodes { nameWithOwner stargazerCount forkCount watchers { totalCount } }
+    }
+  }
+}' > "$tmp/org-$org.json"
+done
+
+stats=$(jq -r -s '
+  (.[0] | map(.data.user)) as $pages
+  | ( [ $pages[].repositories.nodes[] ]
+    + [ .[1:][][] | .data.organization.repositories.nodes[] ]
+    | unique_by(.nameWithOwner) ) as $repos
   | [
       ($repos | map(.stargazerCount) | add // 0),
       ($repos | map(.forkCount) | add // 0),
       ($repos | map(.watchers.totalCount) | add // 0),
       $pages[0].followers.totalCount,
       $pages[0].repositoriesContributedTo.totalCount
-    ] | @tsv')
+    ] | @tsv' "$tmp/user.json" "$tmp"/org-*.json)
 
 IFS=$'\t' read -r stars forks watchers followers contributed <<<"$stats"
 
