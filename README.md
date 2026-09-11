@@ -1,12 +1,3 @@
-I'm a web developer based in Varna, Bulgaria, focusing on building solid solutions for businesses and educational platforms. 
-
-[More about me...](https://hcnotes.cc/about/)
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Stargazers-89-181717?style=for-the-badge&logo=github" alt="Stargazers" />
-  <img src="https://img.shields.io/badge/Forks-34-181717?style=for-the-badge&logo=github" alt="Forks" />
-  <img src="https://img.shields.io/badge/Watchers-19-181717?style=for-the-badge&logo=github" alt="Watchers" />
-  <img src="https://img.shields.io/badge/Followers-12-181717?style=for-the-badge&logo=github" alt="Followers" />
-  <img src="https://img.shields.io/badge/Contributed_to-14_Repos-181717?style=for-the-badge&logo=github" alt="Contributed To" />
-  <img src="https://img.shields.io/badge/Joined-2014-181717?style=for-the-badge&logo=github" alt="Joined" />
-</p>
+<a href="https://hcnotes.cc/about/">
+  <img src="assets/stats.svg" alt="I'm a web developer based in Varna, Bulgaria, focusing on building solid solutions for businesses and educational platforms. More about me at hcnotes.cc/about" width="100%" />
+</a>
